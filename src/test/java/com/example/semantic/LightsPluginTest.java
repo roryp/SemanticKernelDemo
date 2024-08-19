@@ -1,30 +1,32 @@
 package com.example.semantic;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class LightsPluginTest {
 
-    @Mock
     private LightsPlugin lightsPlugin;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        lightsPlugin = mock(LightsPlugin.class);
     }
 
     @Test
     public void testGetLights() {
-        List<LightModel> mockLights = List.of(
-                new LightModel(1, "Table Lamp", false),
-                new LightModel(2, "Porch light", false),
-                new LightModel(3, "Chandelier", true)
+        List<LightModel> mockLights = Arrays.asList(
+            new LightModel(1, "Table Lamp", false),
+            new LightModel(2, "Porch light", false),
+            new LightModel(3, "Chandelier", true)
         );
 
         when(lightsPlugin.getLights()).thenReturn(mockLights);
@@ -37,11 +39,10 @@ public class LightsPluginTest {
 
     @Test
     public void testChangeState() {
-        LightModel mockLight = new LightModel(1, "Table Lamp", false);
-
         when(lightsPlugin.changeState(1, true)).thenReturn(new LightModel(1, "Table Lamp", true));
-
         LightModel updatedLight = lightsPlugin.changeState(1, true);
+        assertEquals(1, updatedLight.getId());
+        assertEquals("Table Lamp", updatedLight.getName());
         assertTrue(updatedLight.isOn());
     }
 }

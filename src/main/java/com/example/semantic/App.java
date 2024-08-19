@@ -27,7 +27,7 @@ import com.microsoft.semantickernel.services.chatcompletion.ChatMessageContent;
 
 public class App {
 
-    private static final String CLIENT_KEY = "your openai key";
+    private static final String CLIENT_KEY = "your key";
     private static final String MODEL_ID = "gpt-4";
 
     public static void main(String[] args) throws Exception {
@@ -41,11 +41,12 @@ public class App {
             .withModelId(MODEL_ID)
             .withOpenAIAsyncClient(client)
             .build();
+
         // Create a plugin (the LightsPlugin class is defined separately)
         KernelPlugin lightPlugin = KernelPluginFactory.createFromObject(new LightsPlugin(),
             "LightsPlugin");
 
-        // Create a kernel with Azure OpenAI chat completion and plugin
+        // Create a kernel with OpenAI chat completion and plugin
         Kernel.Builder builder = Kernel.builder();
         builder.withAIService(ChatCompletionService.class, chatService);
         builder.withPlugin(lightPlugin);
