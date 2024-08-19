@@ -1,41 +1,43 @@
+// Copyright (c) Microsoft. All rights reserved.
 package com.example.semantic;
 
-import com.microsoft.semantickernel.plugin.annotations.DefineKernelFunction;
-import com.microsoft.semantickernel.plugin.annotations.KernelFunctionParameter;
-
+import com.microsoft.semantickernel.semanticfunctions.annotations.DefineKernelFunction;
+import com.microsoft.semantickernel.semanticfunctions.annotations.KernelFunctionParameter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 public class LightsPlugin {
 
     // Mock data for the lights
-    private final Map<Integer, LightModel> lights = new HashMap<>();
+    private final List<LightModel> lights = new ArrayList<>();
 
     public LightsPlugin() {
-        lights.put(1, new LightModel(1, "Table Lamp", false));
-        lights.put(2, new LightModel(2, "Porch light", false));
-        lights.put(3, new LightModel(3, "Chandelier", true));
+        lights.add(new LightModel(1, "Table Lamp", false));
+        lights.add(new LightModel(2, "Porch light", false));
+        lights.add(new LightModel(3, "Chandelier", true));
     }
 
     @DefineKernelFunction(name = "get_lights", description = "Gets a list of lights and their current state")
     public List<LightModel> getLights() {
         System.out.println("Getting lights");
-        return new ArrayList<>(lights.values());
+        return lights;
     }
 
     @DefineKernelFunction(name = "change_state", description = "Changes the state of the light")
     public LightModel changeState(
-            @KernelFunctionParameter(name = "id", description = "The ID of the light to change") int id,
-            @KernelFunctionParameter(name = "isOn", description = "The new state of the light") boolean isOn) {
+        @KernelFunctionParameter(name = "id", description = "The ID of the light to change") int id,
+        @KernelFunctionParameter(name = "isOn", description = "The new state of the light") boolean isOn) {
         System.out.println("Changing light " + id + " " + isOn);
-        if (!lights.containsKey(id)) {
+        Optional<LightModel> light = lights.stream()
+            .filter(l -> l.getId() == id)
+            .findFirst();
+
+        if (light.isEmpty()) {
             throw new IllegalArgumentException("Light not found");
         }
+        light.get().setIsOn(isOn);
 
-        lights.get(id).setIsOn(isOn);
-
-        return lights.get(id);
+        return light.get();
     }
 }
