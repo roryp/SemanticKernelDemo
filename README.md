@@ -1,6 +1,4 @@
-# aistack
-
-## Getting started with Semantic Kernel
+# Getting started with Semantic Kernel
 
 In just a few steps, you can build your first AI agent with Semantic Kernel in Java. This guide will show you how to:
 
