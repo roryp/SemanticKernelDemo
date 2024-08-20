@@ -2,7 +2,7 @@
 
 In just a few steps, you can build your first AI agent with Semantic Kernel in Java. This guide will show you how to:
 
-- Install the necessary packages
+- Install the Semantic Kernel SDK
 - Create a back-and-forth conversation with an AI
 - Give an AI agent the ability to run your code
 - Watch the AI create plans on the fly
