@@ -23,34 +23,6 @@ Instructions for accessing the SemanticKernel Java package is available here. It
         </dependency>
     </dependencies>
 </dependencyManagement>
-
-<dependencies>
-<dependency>
-    <groupId>com.microsoft.semantic-kernel</groupId>
-    <artifactId>semantickernel-api</artifactId>
-</dependency>
-<dependency>
-    <groupId>com.microsoft.semantic-kernel</groupId>
-    <artifactId>semantickernel-aiservices-openai</artifactId>
-</dependency>
-<dependency>
-    <groupId>com.google.code.gson</groupId>
-    <artifactId>gson</artifactId>
-    <version>2.11.0</version>
-</dependency>
-<dependency>
-    <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter-engine</artifactId>
-    <version>5.11.0</version>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>org.mockito</groupId>
-    <artifactId>mockito-core</artifactId>
-    <version>5.12.0</version>
-    <scope>test</scope>
-</dependency>
-</dependencies>
 ```
 
 ### Writing your first console app
