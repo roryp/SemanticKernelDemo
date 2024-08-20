@@ -7,7 +7,7 @@ In just a few steps, you can build your first AI agent with Semantic Kernel in J
 - Give an AI agent the ability to run your code
 - Watch the AI create plans on the fly
 
-### Installing the SDK
+## Installing the SDK
 
 Instructions for accessing the SemanticKernel Java package is available here. It's as easy as:
 
@@ -25,7 +25,7 @@ Instructions for accessing the SemanticKernel Java package is available here. It
 </dependencyManagement>
 ```
 
-### Writing your first console app
+## Writing your first console app
 
 ```java
 OpenAIAsyncClient client = new OpenAIClientBuilder()
@@ -105,13 +105,13 @@ The following back-and-forth chat should be similar to what you see in the conso
 
 If you're interested in understanding more about the code above, we'll break it down in the next section.
 
-### Understanding the code
+## Understanding the code
 
 To make it easier to get started building enterprise apps with Semantic Kernel, we've created a step-by-step that guides you through the process of creating a kernel and using it to interact with AI services.
 
 In the following sections, we'll unpack the above sample by walking through steps 1, 2, 3, 4, 6, 9, and 10. Everything you need to build a simple agent that is powered by an AI service and can run your code.
 
-#### 1) Import packages
+### 1) Import packages
 
 For this sample, we first started by importing the following packages:
 
@@ -131,7 +131,7 @@ import com.microsoft.semantickernel.services.chatcompletion.ChatHistory;
 import com.microsoft.semantickernel.services.chatcompletion.ChatMessageContent;
 ```
 
-#### 2) Add AI services
+### 2) Add AI services
 
 Afterwards, we add the most important part of a kernel: the AI services that you want to use. In this example, we added an Azure OpenAI chat completion service to the kernel builder.
 
@@ -152,7 +152,7 @@ Kernel kernel = Kernel.builder()
     .build();
 ```
 
-#### 4) Build the kernel and retrieve services
+### 4) Build the kernel and retrieve services
 
 ```java
 // Create a kernel with Azure OpenAI chat completion and plugin
@@ -162,11 +162,11 @@ Kernel kernel = Kernel.builder()
     .build();
 ```
 
-#### 6) Add plugins
+### 6) Add plugins
 
 With plugins, can give your AI agent the ability to run your code to retrieve information from external sources or to perform actions. In the above example, we added a plugin that allows the AI agent to interact with a light bulb. Below, we'll show you how to create this plugin.
 
-##### Create a native plugin
+#### Create a native plugin
 
 Below, you can see that creating a native plugin is as simple as creating a new class.
 
@@ -211,7 +211,7 @@ public class LightsPlugin {
 }
 ```
 
-##### Add the plugin to the kernel
+#### Add the plugin to the kernel
 
 Once you've created your plugin, you can add it to the kernel so the AI agent can access it. In the sample, we added the LightsPlugin class to the kernel.
 
@@ -221,7 +221,7 @@ KernelPlugin lightPlugin = KernelPluginFactory.createFromObject(new LightsPlugin
     "LightsPlugin");
 ```
 
-#### 9) Planning
+### 9) Planning
 
 Semantic Kernel leverages function calling–a native feature of most LLMs–to provide planning. With function calling, LLMs can request (or call) a particular function to satisfy a user's request. Semantic Kernel then marshals the request to the appropriate function in your codebase and returns the results back to the LLM so the AI agent can generate a final response.
 
@@ -235,7 +235,7 @@ InvocationContext invocationContext = new InvocationContext.Builder()
     .build();
 ```
 
-#### 10) Invoke
+### 10) Invoke
 
 Finally, we invoke the AI agent with the plugin. The sample code demonstrates how to generate a non-streaming response, but you can also generate a streaming response by using the GetStreamingChatMessageContentAsync method.
 
@@ -249,7 +249,7 @@ List<ChatMessageContent<?>> results = chatCompletionService
     .getChatMessageContentsAsync(history, kernel, invocationContext)
     .block();
 ```
-#### 11) Summary Steps to Create a Chat Application
+### 11) Summary Steps to Create a Chat Application
 
 1. Import necessary packages and classes.
 2. Define the `App` class and declare constants for `CLIENT_KEY` and `MODEL_ID`.
