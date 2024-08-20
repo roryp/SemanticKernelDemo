@@ -279,4 +279,23 @@ List<ChatMessageContent<?>> results = chatCompletionService
     .getChatMessageContentsAsync(history, kernel, invocationContext)
     .block();
 ```
+#### 11) Summary Steps to Create a Chat Application
 
+1. Import necessary packages and classes.
+2. Define the `App` class and declare constants for `CLIENT_KEY` and `MODEL_ID`.
+3. In the `main` method, create an `OpenAIAsyncClient` using `OpenAIClientBuilder`.
+4. Create a `ChatCompletionService` using `OpenAIChatCompletion.builder()`.
+5. Create a `KernelPlugin` instance using `KernelPluginFactory.createFromObject()`.
+6. Build a `Kernel` instance using `Kernel.Builder` and add the AI service and plugin.
+7. Retrieve the `ChatCompletionService` from the kernel.
+8. Add a global context variable converter for `LightModel` using `ContextVariableTypes.addGlobalConverter()`.
+9. Create a `KernelHooks` instance and add pre-tool, pre-chat, and post-chat hooks.
+10. Add the hooks to the kernel's global hooks.
+11. Enable planning by creating an `InvocationContext` with specific settings.
+12. Create a `ChatHistory` instance to store the conversation.
+13. Use a `Scanner` to collect user input in a loop.
+14. Add user input to the chat history and get chat message contents asynchronously.
+15. Print the assistant's response and add it to the chat history.
+16. Repeat the loop until the user input is empty.
+
+These steps outline the process of creating a chat application using the Semantic Kernel framework.
