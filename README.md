@@ -1,5 +1,7 @@
 # Semantic Kernel Demo
 
+![Semantic Kernel](the-kernel-is-at-the-center-of-everything.png)
+
 ## Introduction
 This project is a Java application that interacts with a set of lights using a Semantic Kernel OpenAI plugin system.
 
@@ -32,6 +34,11 @@ To run the application, use the following command:
 ```sh
 java -cp target/classes com.example.semantic.App
 ```
+
+## Learn More
+For more information, visit the [Semantic Kernel Documentation](https://learn.microsoft.com/en-us/semantic-kernel/concepts/kernel?pivots=programming-language-java).
+
+## Appendix - detailed design
 
 - Setup Environment:
   - Ensure the `OPENAI_API_KEY` environment variable is set, which is required for the OpenAI API.
