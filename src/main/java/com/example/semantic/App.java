@@ -27,13 +27,13 @@ import com.microsoft.semantickernel.services.chatcompletion.ChatMessageContent;
 
 public class App {
 
-    private static final String CLIENT_KEY = "your key";
+    private static final String OPENAI_API_KEY = System.getenv("OPENAI_API_KEY");
     private static final String MODEL_ID = "gpt-4";
 
     public static void main(String[] args) throws Exception {
 
         OpenAIAsyncClient client = new OpenAIClientBuilder()
-                .credential(new KeyCredential(CLIENT_KEY))
+                .credential(new KeyCredential(OPENAI_API_KEY))
                 .buildAsyncClient();
         
         // Create your AI service client
