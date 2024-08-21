@@ -64,21 +64,9 @@ public class App {
         KernelHooks hook = new KernelHooks();
 
         hook.addPreToolCallHook((context) -> {
-            System.out.println("Pre-tool call hook");
+            System.out.println("<"+ context.getFunction().getMetadata().getName()+">");
             return context;
         });
-
-        hook.addPreChatCompletionHook(
-            (context) -> {
-                System.out.println("Pre-chat completion hook");
-                return context;
-            });
-
-        hook.addPostChatCompletionHook(
-            (context) -> {
-                System.out.println("Post-chat completion hook");
-                return context;
-            });
 
         kernel.getGlobalKernelHooks().addHooks(hook);
 
