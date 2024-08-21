@@ -36,7 +36,7 @@ java -cp target/classes com.example.semantic.App
 ```
 
 ## Learn More
-For more information, visit the [Semantic Kernel Documentation](https://learn.microsoft.com/en-us/semantic-kernel/concepts/kernel?pivots=programming-language-java).
+For more information, visit the [Semantic Kernel Documentation](https://learn.microsoft.com/en-us/semantic-kernel/get-started/quick-start-guide?pivots=programming-language-java).
 
 ## Appendix - detailed design
 
