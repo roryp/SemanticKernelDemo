@@ -1,4 +1,4 @@
-# Semantic Kernel Demo
+# Semantic Kernel Java Demo
 
 ![Semantic Kernel](the-kernel-is-at-the-center-of-everything.png)
 
