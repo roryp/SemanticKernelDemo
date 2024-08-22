@@ -57,13 +57,12 @@ public class App {
         // Register a global converter for the LightModel class to enable serialization and deserialization of context variables.
         ContextVariableTypes.addGlobalConverter(ContextVariableJacksonConverter.create(LightModel.class));
 
+        //add a hook when the light plugin is called
         KernelHooks hook = new KernelHooks();
-
         hook.addPreToolCallHook((context) -> {
             System.out.println("<"+ context.getFunction().getMetadata().getName()+">");
             return context;
         });
-
         kernel.getGlobalKernelHooks().addHooks(hook);
 
         // Enable planning
