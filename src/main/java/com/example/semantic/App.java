@@ -1,18 +1,16 @@
 // Copyright (c) Microsoft. All rights reserved.
 package com.example.semantic;
 
-
 import java.util.List;
 import java.util.Scanner;
 
 import com.azure.ai.openai.OpenAIAsyncClient;
 import com.azure.ai.openai.OpenAIClientBuilder;
 import com.azure.core.credential.KeyCredential;
-import com.google.gson.Gson;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatCompletion;
-import com.microsoft.semantickernel.contextvariables.ContextVariableTypeConverter;
 import com.microsoft.semantickernel.contextvariables.ContextVariableTypes;
+import com.microsoft.semantickernel.contextvariables.converters.ContextVariableJacksonConverter;
 import com.microsoft.semantickernel.hooks.KernelHooks;
 import com.microsoft.semantickernel.orchestration.InvocationContext;
 import com.microsoft.semantickernel.orchestration.InvocationContext.Builder;
@@ -56,10 +54,8 @@ public class App {
         ChatCompletionService chatCompletionService = kernel.getService(
             ChatCompletionService.class);
 
-        ContextVariableTypes
-            .addGlobalConverter(ContextVariableTypeConverter.builder(LightModel.class)
-                .toPromptString(new Gson()::toJson)
-                .build());
+        // Register a global converter for the LightModel class to enable serialization and deserialization of context variables.
+        ContextVariableTypes.addGlobalConverter(ContextVariableJacksonConverter.create(LightModel.class));
 
         KernelHooks hook = new KernelHooks();
 
@@ -74,9 +70,6 @@ public class App {
         InvocationContext invocationContext = new Builder()
             .withReturnMode(InvocationReturnMode.LAST_MESSAGE_ONLY)
             .withToolCallBehavior(ToolCallBehavior.allowAllKernelFunctions(true))
-            .withContextVariableConverter(ContextVariableTypeConverter.builder(LightModel.class)
-                .toPromptString(new Gson()::toJson)
-                .build())
             .build();
 
         // Create a history to store the conversation

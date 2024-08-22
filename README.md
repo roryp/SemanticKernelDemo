@@ -40,24 +40,43 @@ For more information, visit the [Semantic Kernel Documentation](https://learn.mi
 
 ## Appendix - detailed design
 
-- Setup Environment:
-  - Ensure the `OPENAI_API_KEY` environment variable is set, which is required for the OpenAI API.
-- Initialize OpenAI Client:
-  - The application initializes an `OpenAIAsyncClient` using the `OpenAIClientBuilder` with the provided API key.
-- Create Kernel:
-  - An instance of `Kernel` from the `com.microsoft.semantickernel` package is created to manage plugins and orchestrate tasks.
-- Define Plugins:
-  - The `LightsPlugin` class is instantiated, which contains methods to get the list of lights and change their states.
-- Register Plugins:
-  - The `LightsPlugin` instance is registered with the kernel, making its functions available for invocation.
-- Setup Chat Completion Service:
-  - The `ChatCompletionService` is set up to handle chat interactions, using the OpenAI model specified by `MODEL_ID`.
-- Initialize Chat History:
-  - A `ChatHistory` object is created to maintain the conversation context between the user and the assistant.
-- User Input Loop:
-  - The application enters a loop where it reads user input from the console.
-- Process User Input:
-  - The user input is sent to the `ChatCompletionService`, which processes it and generates responses using the OpenAI model.
-- Output and Update History:
-  - The assistant's responses are printed to the console and added to the chat history to maintain context for future interactions.
+## Import Statements:
+
+The code begins by importing various classes and packages required for the application, including Azure OpenAI, Semantic Kernel, and other utility classes.
+
+
+## Constants Initialization:
+
+Two constants are defined: `OPENAI_API_KEY` (retrieved from environment variables) and `MODEL_ID` (set to "gpt-4").
+
+## OpenAI Client Setup:
+
+An `OpenAIAsyncClient` is created using the `OpenAIClientBuilder` with the provided API key.
+
+## Chat Completion Service Setup:
+
+A `ChatCompletionService` is created using the `OpenAIChatCompletion` builder, configured with the model ID and the OpenAI client.
+
+## Plugin Creation:
+
+A `KernelPlugin` named `lightPlugin` is created from an instance of `LightsPlugin` using the `KernelPluginFactory`.
+
+## Kernel Setup:
+
+A `Kernel` is built using the `Kernel.Builder`, which includes the `ChatCompletionService` and the `lightPlugin`. The kernel is then built and stored in a variable.
+
+## Hook and Invocation Context Setup:
+
+A `KernelHooks` instance is created, and a pre-tool call hook is added to print the function name before any tool call.
+The hook is added to the global kernel hooks.
+An `InvocationContext` is created with specific return mode and tool call behavior settings.
+
+## Chat Interaction Loop:
+
+A `ChatHistory` instance is created to store the conversation.
+A loop is initiated to handle user input and generate responses using the chat completion service.
+User input is read from the console, added to the chat history, and processed by the chat completion service.
+The results are printed, and the assistant's messages are added to the chat history.
+The loop continues until the user provides an empty input.
+
 
