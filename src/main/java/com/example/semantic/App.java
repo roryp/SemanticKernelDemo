@@ -60,7 +60,7 @@ public class App {
         //add a hook when the light plugin is called
         KernelHooks hook = new KernelHooks();
         hook.addPreToolCallHook((context) -> {
-            System.out.println("<"+ context.getFunction().getMetadata().getName()+">");
+            System.out.println("Called Plugin: "+ context.getFunction().getMetadata().getName());
             return context;
         });
         kernel.getGlobalKernelHooks().addHooks(hook);
