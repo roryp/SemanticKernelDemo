@@ -33,16 +33,16 @@ public class App {
         OpenAIAsyncClient client = new OpenAIClientBuilder()
                 .credential(new KeyCredential(OPENAI_API_KEY))
                 .buildAsyncClient();
-        
+
         // Create your AI service client
         ChatCompletionService chatService = OpenAIChatCompletion.builder()
-            .withModelId(MODEL_ID)
-            .withOpenAIAsyncClient(client)
-            .build();
+                .withModelId(MODEL_ID)
+                .withOpenAIAsyncClient(client)
+                .build();
 
         // Create a plugin (the LightsPlugin class is defined separately)
         KernelPlugin lightPlugin = KernelPluginFactory.createFromObject(new LightsPlugin(),
-            "LightsPlugin");
+                "LightsPlugin");
 
         // Create a kernel with OpenAI chat completion and plugin
         Kernel.Builder builder = Kernel.builder();
@@ -52,24 +52,25 @@ public class App {
         Kernel kernel = builder.build();
 
         ChatCompletionService chatCompletionService = kernel.getService(
-            ChatCompletionService.class);
+                ChatCompletionService.class);
 
-        // Register a global converter for the LightModel class to enable serialization and deserialization of context variables.
+        // Register a global converter for the LightModel class to enable serialization
+        // and deserialization of context variables.
         ContextVariableTypes.addGlobalConverter(ContextVariableJacksonConverter.create(LightModel.class));
 
-        //add a hook when the light plugin is called
+        // add a hook when the light plugin is called
         KernelHooks hook = new KernelHooks();
         hook.addPreToolCallHook((context) -> {
-            System.out.println("Called Plugin: "+ context.getFunction().getMetadata().getName());
+            System.out.println("Called Plugin: " + context.getFunction().getMetadata().getName());
             return context;
         });
         kernel.getGlobalKernelHooks().addHooks(hook);
 
         // Enable planning
         InvocationContext invocationContext = new Builder()
-            .withReturnMode(InvocationReturnMode.LAST_MESSAGE_ONLY)
-            .withToolCallBehavior(ToolCallBehavior.allowAllKernelFunctions(true))
-            .build();
+                .withReturnMode(InvocationReturnMode.LAST_MESSAGE_ONLY)
+                .withToolCallBehavior(ToolCallBehavior.allowAllKernelFunctions(true))
+                .build();
 
         // Create a history to store the conversation
         ChatHistory history = new ChatHistory();
@@ -80,12 +81,13 @@ public class App {
             // Collect user input
             System.out.print("User > ");
             userInput = scanner.nextLine();
-            // Add user input
+            // Add user input to the chat history
             history.addUserMessage(userInput);
+            // Get the chat message contents asynchronously
             List<ChatMessageContent<?>> results = chatCompletionService.getChatMessageContentsAsync(
-                history, kernel, invocationContext).block();
+                    history, kernel, invocationContext).block();
             for (ChatMessageContent<?> result : results) {
-                // Print the results
+                // Print the results from the assistant
                 if (result.getAuthorRole() == AuthorRole.ASSISTANT && result.getContent() != null) {
                     System.out.println("Assistant > " + result);
                 }
