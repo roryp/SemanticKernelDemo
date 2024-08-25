@@ -9,7 +9,6 @@ import java.util.Optional;
 
 public class LightsPlugin {
 
-    // Mock data for the lights
     private final List<LightModel> lights = new ArrayList<>();
 
     public LightsPlugin() {
