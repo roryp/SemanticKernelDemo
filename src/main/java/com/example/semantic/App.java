@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 import com.azure.ai.openai.OpenAIAsyncClient;
 import com.azure.ai.openai.OpenAIClientBuilder;
+import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.credential.KeyCredential;
+import com.azure.core.util.Configuration;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatCompletion;
 import com.microsoft.semantickernel.contextvariables.ContextVariableTypes;
@@ -25,13 +27,15 @@ import com.microsoft.semantickernel.services.chatcompletion.ChatMessageContent;
 
 public class App {
 
-    private static final String OPENAI_API_KEY = System.getenv("OPENAI_API_KEY");
-    private static final String MODEL_ID = "gpt-4";
-
     public static void main(String[] args) throws Exception {
 
-        OpenAIAsyncClient client = new OpenAIClientBuilder()
-                .credential(new KeyCredential(OPENAI_API_KEY))
+        String AZURE_CLIENT_KEY = Configuration.getGlobalConfiguration().get("AZURE_OPENAI_API_KEY");
+        String CLIENT_ENDPOINT = Configuration.getGlobalConfiguration().get("AZURE_OPENAI_ENDPOINT");
+        String MODEL_ID = "gpt-4o";
+        
+         OpenAIAsyncClient client = new OpenAIClientBuilder()
+                .credential(new AzureKeyCredential(AZURE_CLIENT_KEY))
+                .endpoint(CLIENT_ENDPOINT)
                 .buildAsyncClient();
 
         // Create your AI service client
