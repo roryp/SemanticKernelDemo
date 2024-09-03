@@ -18,9 +18,10 @@ This project is a Java application that interacts with a set of lights using a S
     cd aistack
     ```
 
-2. Set the `OPENAI_API_KEY` environment variable:
+2. Set the Azure OpenAI environment variables:
     ```sh
-    set OPENAI_API_KEY=your_key_value
+    set AZURE_CLIENT_KEY=your_key_value
+    set CLIENT_ENDPOINT=your_key_value
     ```
 
 3. Build the project:
@@ -35,6 +36,12 @@ To run the application, use the following command:
 java -cp target/classes com.example.semantic.App
 ```
 
+## Running Tests
+To run the tests, use the following command:
+```sh
+mvn test
+```
+
 ## Learn More
 For more information, visit the [Semantic Kernel Documentation](https://learn.microsoft.com/en-us/semantic-kernel/get-started/quick-start-guide?pivots=programming-language-java).
 
@@ -44,10 +51,9 @@ For more information, visit the [Semantic Kernel Documentation](https://learn.mi
 
 The code begins by importing various classes and packages required for the application, including Azure OpenAI, Semantic Kernel, and other utility classes.
 
-
 ## Constants Initialization:
 
-Two constants are defined: `OPENAI_API_KEY` (retrieved from environment variables) and `MODEL_ID` (set to "gpt-4").
+Three constants are defined: `AZURE_CLIENT_KEY`,`CLIENT_ENDPOINT` (retrieved from environment variables) and `MODEL_ID` (set to "gpt-4o").
 
 ## OpenAI Client Setup:
 
