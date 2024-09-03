@@ -9,7 +9,8 @@ This project is a Java application that interacts with a set of lights using a S
 ### Prerequisites
 - Java Development Kit (JDK)
 - Maven
-- Set the `OPENAI_API_KEY` environment variable
+- Azure OpenAI account with the following:
+    - Deployed GPT-4o model with enough token throughput for the application (e.g. 100k tokens per month)
 
 ### Steps
 1. Clone the repository:
