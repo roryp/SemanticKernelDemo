@@ -15,8 +15,8 @@ This project is a Java application that interacts with a set of lights using a S
 ### Steps
 1. Clone the repository:
     ```sh
-    git clone https://github.com/roryp/aistack.git
-    cd aistack
+    git clone https://github.com/roryp/SemanticKernelDemo.git
+    cd SemanticKernelDemo
     ```
 
 2. Set the Azure OpenAI environment variables:
