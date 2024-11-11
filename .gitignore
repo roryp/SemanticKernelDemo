@@ -3,3 +3,5 @@ target
 .vscode/settings.json
 .idea
 semantic-kernel-sample.iml
+
+.autodev

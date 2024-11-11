@@ -33,8 +33,8 @@ public class LightsPluginTest {
 
         List<LightModel> lights = lightsPlugin.getLights();
         assertEquals(3, lights.size());
-        assertEquals("Table Lamp", lights.get(0).getName());
-        assertFalse(lights.get(0).isOn());
+        assertEquals("Table Lamp", lights.getFirst().getName());
+        assertFalse(lights.getFirst().isOn());
     }
 
     @Test
